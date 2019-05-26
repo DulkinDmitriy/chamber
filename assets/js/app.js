@@ -15,3 +15,30 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+import socket from "./socket"
+let channel = socket.channel("room:global")
+
+channel.join()
+    .receive("ok", resp => console.log(resp))
+    .receive("error", reason => console.log(reason))
+
+channel.on("render:new:message", message => {
+    let container = document.getElementById("messages-container")
+    renderMessage(container, message.content)
+})
+
+window.onload = function () {
+    // Edit this
+    channel.push("new:message", {
+        content: "hello"
+    })
+}
+
+function renderMessage(container, content) {
+    let template = document.createElement("div")
+    template.className = "message"
+    template.innerText = content
+
+    container.appendChild(template)
+}
