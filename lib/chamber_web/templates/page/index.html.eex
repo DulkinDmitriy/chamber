@@ -1,0 +1,20 @@
+<div class="card" id="chat-window">
+    <div class="card-header">Chamber Global Chat</div>
+    <div id="messages-container" class="card-body"></div>
+    <div class="card-footer">
+        <div class="input-group" id="input-owner">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                aria-describedby="basic-addon1" id="owner">
+        </div>
+        <div class="input-group" id="input-message">
+            <input type="text" id="message" class="form-control" placeholder="Message" aria-label="Message"
+                aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

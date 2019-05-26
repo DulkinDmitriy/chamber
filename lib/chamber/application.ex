@@ -14,7 +14,6 @@ defmodule Chamber.Application do
       ChamberWeb.Endpoint,
       # Starts a worker by calling: Chamber.Worker.start_link(arg)
       # {Chamber.Worker, arg},
-      ChamberWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

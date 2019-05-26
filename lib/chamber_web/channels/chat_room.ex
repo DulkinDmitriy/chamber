@@ -1,10 +1,7 @@
 defmodule ChamberWeb.ChatRoom do
   use ChamberWeb, :channel
-  alias ChamberWeb.Presence
 
   def join("room:global", _payload, socket) do
-    Presence.track(socket, :online, %{ok: "test"})
-
     {:ok, socket}
   end
 

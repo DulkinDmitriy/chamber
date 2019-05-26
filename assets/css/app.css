@@ -1,4 +1,30 @@
-/* This file is for your main application css. */
+.alert:empty {
+    display: none;
+}
 
-@import "./phoenix.css";
+#messages-container {
+    height: 80vh;
+}
+
+#chat-window {
+    margin-top: 10px;
+}
+
+#owner {
+    text-align: center;
+}
+
+#input-owner {
+    width: 20%;
+    display: inline-flex;
+}
+
+#input-message{
+    width: 78%;
+    display: inline-flex;
+}
+
+.message {
+    margin-bottom: 10px;
+}
 

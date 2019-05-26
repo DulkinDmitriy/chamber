@@ -17,28 +17,61 @@ import "phoenix_html"
 // import socket from "./socket"
 
 import socket from "./socket"
+
 let channel = socket.channel("room:global")
 
 channel.join()
-    .receive("ok", resp => console.log(resp))
+    .receive("ok", () => console.log("Successfully connected to global chat"))
     .receive("error", reason => console.log(reason))
 
-channel.on("render:new:message", message => {
-    let container = document.getElementById("messages-container")
-    renderMessage(container, message.content)
-})
 
 window.onload = function () {
-    // Edit this
-    channel.push("new:message", {
-        content: "hello"
+    let sendButton = document.getElementById("send-button")
+    let owner = document.getElementById("owner")
+    let message = document.getElementById("message")
+
+    channel.on("render:new:message", message => {
+        let container = document.getElementById("messages-container")
+        renderMessage(container, message.owner, message.content)
+    })
+
+    sendButton.addEventListener("click", () => {
+        switch ("") {
+            case owner.value:
+                alert("Please enter a username")
+                return
+            case message.value:
+                alert("Please enter a message")
+                return
+        }
+
+        channel.push("new:message", {
+            owner: owner.value,
+            content: message.value
+        })
+
+        message.value = ""
     })
 }
 
-function renderMessage(container, content) {
-    let template = document.createElement("div")
-    template.className = "message"
-    template.innerText = content
+function renderMessage(container, owner, content) {
+    let date = new Date()
+    let message = document.createElement("div")
+    message.className = "message card"
 
-    container.appendChild(template)
+    let messageOwner = messageItem("card-header", `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${owner}`)
+
+    let messageContent = messageItem("card-body", content)
+
+    message.appendChild(messageOwner)
+    message.appendChild(messageContent)
+    container.appendChild(message)
+}
+
+function messageItem(className, text) {
+    let element = document.createElement("div")
+    element.className = className
+    element.innerText = text
+
+    return element
 }
